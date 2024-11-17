@@ -1,4 +1,4 @@
-.aux
-.log
-.out
-.gz
+#Para ignorar a los archivos con estas extensiones
+*.aux
+*.log
+*.out
