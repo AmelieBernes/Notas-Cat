@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex 2024.11.14)  17 NOV 2024 00:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex 2024.11.14)  17 NOV 2024 00:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -864,10 +864,6 @@ aux)
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `categoriasAmelie.out' has not changed.
 (rerunfilecheck)             Checksum: FCA4B42F96CDE5621A14F427985DBBF2;506.
  ) 
@@ -903,7 +899,7 @@ type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/a
 msfonts/symbols/msam10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/s
 ymbols/msbm10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.p
 fb>
-Output written on categoriasAmelie.pdf (6 pages, 309014 bytes).
+Output written on categoriasAmelie.pdf (6 pages, 308960 bytes).
 PDF statistics:
  212 PDF objects out of 1000 (max. 8388607)
  146 compressed objects within 2 object streams
