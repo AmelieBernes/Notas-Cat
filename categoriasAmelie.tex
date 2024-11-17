@@ -1,52 +1,35 @@
 \documentclass[10pt]{article}
 \usepackage[a4paper, total={6in, 8in}]{geometry}
-%\input{paquetes}
+
 
 % ----------------------- Packages --------------------------
 
 \usepackage[utf8]{inputenc}
-
-				
 \usepackage{babel}
 %\decimalpoint
+
+
 \usepackage{mathtools}% http://ctan.org/pkg/mathtool
 \usepackage{amsthm, amsmath, bm, amssymb} %math packages
-\usepackage{lineno}
+\usepackage{lineno} %Para enumerar las lineas
 
+
+
+% -------------------------------------HIGHLIGHT-------
+
+\usepackage[dvipsnames]{xcolor}
+%\newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
+\usepackage{color, soul}
+\usepackage{hyperref}
+\newcommand{\hlgray}[1]{{\sethlcolor{lightgray}\hl{#1}}}
+
+
+% ----------------------------------------------FIGURAS-----------
 \usepackage{tikz}
 \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt 
 
-
-\usepackage[dvipsnames]{xcolor}
-\newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
-
-% --------------- highlight -----------------------------
-
-\usepackage{color, soul}
-\usepackage{hyperref}
-
-
-\newcommand{\hlpink}[1]{{\sethlcolor{lime}\hl{#1}}}
-\newcommand{\hlgray}[1]{{\sethlcolor{lightgray}\hl{#1}}}
-\newcommand{\hllilac}[1]{{\sethlcolor{Orchid}\hl{#1}}}
-
-% ---------------------------------------------------------
-
 \usepackage{subcaption, threeparttable}
 \usepackage{graphicx} 
-%\graphicspath{{./imagenes}}
-\DeclareCaptionFormat{custom}
-{
-    \textbf{#1#2}\textit{\small #3}
-}
-\captionsetup{format=custom}
-\usepackage[font=small,labelfont=bf]{caption} %para que los nombres 'Figura x' estén en negritas.
-
-%Para rotar imágenes:
-\usepackage{wrapfig}
-\usepackage{lscape}
-\usepackage{rotating}
-\usepackage{epstopdf}
 
 \usepackage{marginfix}
 \usepackage{marginnote}
@@ -59,12 +42,6 @@
 % Captions at the side of the page
 %\usepackage[wide]{sidecap}
 \usepackage{morefloats}
-
-\usepackage{subfiles} % Best loaded last in the preamble
-
-
-
-
 \usepackage{float}
 
 \newcommand*{\IR}{\mathbb{R}}
@@ -76,10 +53,33 @@
 
 \newcommand{\TODO}[1]{\textcolor{violet}{#1}} % TODO quitar. Sólo lo uso mientras estoy editando para resaltar en morado.
 
-%Ambientes de teorema antiguos. TODO quitar esto.
-			\newtheorem{teo}{Teorema}[section]
+
+% -------------------------------------- AMBIENTES -----------------
+
+\let\newemptytheorem\newtheorem
+\usepackage{thmbox}
+
+\newemptytheorem{ejemplo}{Ejemplo}
+
+
+			\newtheorem[M]{teo}{Teorema}[section]
 			%Pongo a todas el contador de 'teo'
-			\newtheorem{ej}{Ejercicio}
+			\newtheorem[M]{listaObj}[teo]{Lista de deseos}
+			\newtheorem[M]{preg}[teo]{Pregunta}
+			\newtheorem[M]{lema}[teo]{Lema}
+			\newtheorem[M]{hip}[teo]{Hipótesis}
+			\newtheorem[M]{prop}[teo]{Proposición}
+			\newtheorem[M]{obs}[teo]{Observación}
+			\newtheorem[M]{cor}[teo]{Corolario}
+			\newtheorem[M]{defi}[teo]{Definición}
+			\newtheorem[M]{notacion}[teo]{Notación}
+			\newtheorem[M]{nota}[teo]{Nota}
+			\newtheorem{pregunta}{Pregunta}
+
+			
+
+
+\usepackage{subfiles} % Best loaded last in the preamble
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -88,16 +88,146 @@
 \textbf{Amélie Bernès}
 \end{flushright}
 
+\section{Igualadores (Equalizers)}
+En una categoría $\mathcal{A}$, un \textbf{igualador}
+$(Z, h: Z \longrightarrow X)$ para dos morfismos 
+$f, g : X \longrightarrow Y$ es una pareja tal que 
+
+\begin{minipage}{0.5\textwidth}
+\begin{itemize}
+	\item $f \circ h = g \circ h$
+	\item Si $W$ es otro objeto y $k : W \longrightarrow X$
+	es tal que $f \circ k = g \circ k$, entonces
+	existe un único morfismo $\phi: W \longrightarrow Z$ tal que
+	$\phi: W \longrightarrow Z$ tal que $k = h \circ \phi$. 
+\end{itemize}
+\end{minipage} \hfill
+\begin{minipage}{0.45\textwidth}
+
+\begin{center}
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,235); %set diagram left start at 0, and has height of 235
+
+
+% Text Node
+\draw (194,91.57) node  [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,opacity=1 ]  {$X$};
+% Text Node
+\draw (120,91.57) node  [color={rgb, 255:red, 189; green, 16; blue, 224 }  ,opacity=1 ]  {$Z$};
+% Text Node
+\draw (262,92.57) node  [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,opacity=1 ]  {$Y$};
+% Text Node
+\draw (228,73) node  [font=\footnotesize,color={rgb, 255:red, 144; green, 19; blue, 254 }  ,opacity=1 ]  {$f$};
+% Text Node
+\draw (227,104) node  [font=\footnotesize,color={rgb, 255:red, 144; green, 19; blue, 254 }  ,opacity=1 ]  {$g$};
+% Text Node
+\draw (155,78) node  [font=\footnotesize,color={rgb, 255:red, 189; green, 16; blue, 224 }  ,opacity=1 ]  {$h$};
+% Text Node
+\draw (120,157.57) node    {$W$};
+% Text Node
+\draw (163,134) node  [font=\footnotesize,color={rgb, 255:red, 0; green, 0; blue, 0 }  ,opacity=1 ]  {$k$};
+% Text Node
+\draw (102,128) node  [font=\footnotesize,color={rgb, 255:red, 0; green, 0; blue, 0 }  ,opacity=1 ]  {$\exists !\ \phi $};
+% Connection
+\draw [color={rgb, 255:red, 189; green, 16; blue, 224 }  ,draw opacity=1 ]   (129,91.57) -- (182.5,91.57) ;
+\draw [shift={(184.5,91.57)}, rotate = 180] [color={rgb, 255:red, 189; green, 16; blue, 224 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+% Connection
+\draw [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ]   (203.5,86.71) -- (251,87.41) ;
+\draw [shift={(253,87.44)}, rotate = 180.84] [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+% Connection
+\draw [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ]   (203.5,96.71) -- (251,97.41) ;
+\draw [shift={(253,97.44)}, rotate = 180.84] [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+% Connection
+\draw    (131.5,147.31) -- (183.01,101.38) ;
+\draw [shift={(184.5,100.04)}, rotate = 138.27] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+% Connection
+\draw  [dash pattern={on 0.84pt off 2.51pt}]  (120,145.57) -- (120,105.57) ;
+\draw [shift={(120,103.57)}, rotate = 90] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+\end{tikzpicture}
+
+\end{center}
+\end{minipage}
+
+\begin{prop}
+Si $h: Z \longrightarrow X$ es el igualador de un par de morfismos,
+entonces $h$ es un monomorfismo (i.e. cancelable por la izquierda).
+\end{prop}
+\noindent
+\textbf{Demostración.}
+En efecto, sean $p, q: A \longrightarrow Z$ morfismos tales que 
+$h \circ q = h \circ p$.
+Entonces, como $f \circ h = g \circ h$, también
+\[
+f \circ (h \circ p) = (f \circ h) \circ p 
+= (g \circ h) \circ p = g \circ (h \circ p).
+\]
+Luego, existe un único $\phi : A \longrightarrow Z$ tal que 
+\[
+h \circ \phi = h \circ p.
+\]
+Tanto $\phi = p$ como $\phi = q$ funcionan, luego, $p = q$.
+
+\begin{center}
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,235); %set diagram left start at 0, and has height of 235
+
+
+% Text Node
+\draw (194,91.57) node  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,opacity=1 ]  {$X$};
+% Text Node
+\draw (120,91.57) node  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,opacity=1 ]  {$Z$};
+% Text Node
+\draw (262,92.57) node  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,opacity=1 ]  {$Y$};
+% Text Node
+\draw (228,73) node  [font=\footnotesize,color={rgb, 255:red, 0; green, 0; blue, 0 }  ,opacity=1 ]  {$f$};
+% Text Node
+\draw (227,105) node  [font=\footnotesize,color={rgb, 255:red, 0; green, 0; blue, 0 }  ,opacity=1 ]  {$g$};
+% Text Node
+\draw (155,78) node  [font=\footnotesize,color={rgb, 255:red, 0; green, 0; blue, 0 }  ,opacity=1 ]  {$h$};
+% Text Node
+\draw (120,157.57) node    {$W$};
+% Text Node
+\draw (168,136) node  [font=\footnotesize,color={rgb, 255:red, 0; green, 0; blue, 0 }  ,opacity=1 ]  {$h\ \circ p$};
+% Text Node
+\draw (107,120) node  [font=\footnotesize,color={rgb, 255:red, 0; green, 0; blue, 0 }  ,opacity=1 ]  {$q$};
+% Text Node
+\draw (136,121) node  [font=\footnotesize,color={rgb, 255:red, 0; green, 0; blue, 0 }  ,opacity=1 ]  {$p$};
+% Connection
+\draw [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ]   (129,91.57) -- (182.5,91.57) ;
+\draw [shift={(184.5,91.57)}, rotate = 180] [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+% Connection
+\draw [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ]   (203.5,86.71) -- (251,87.41) ;
+\draw [shift={(253,87.44)}, rotate = 180.84] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+% Connection
+\draw [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ]   (203.5,96.71) -- (251,97.41) ;
+\draw [shift={(253,97.44)}, rotate = 180.84] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+% Connection
+\draw [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ]   (131.5,147.31) -- (183.01,101.38) ;
+\draw [shift={(184.5,100.04)}, rotate = 138.27] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+% Connection
+\draw [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ]   (115,145.57) -- (115,105.57) ;
+\draw [shift={(115,103.57)}, rotate = 90] [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+% Connection
+\draw [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ]   (125,145.57) -- (125,105.57) ;
+\draw [shift={(125,103.57)}, rotate = 90] [color={rgb, 255:red, 144; green, 19; blue, 254 }  ,draw opacity=1 ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+\end{tikzpicture}
+\end{center}
+
+\QEDB
+\vspace{0.2cm}
+
+\section{Categorías reflexivas, Nakagawa (Categorical Topology)}
+
 Estamos suponiendo que en la categoría $\mathcal{A}$ existen todos los 
 límites pequeños (p.ej. productos, igualadores) y que $\mathcal{B}$
 es cerrada bajo isomorfismos.
 
-\vspace{0.2cm}
-\textbf{Lema 7.10:} Si $\mathcal{B}$ es fuertemente cerrada en 
+\begin{lema}
+\textbf{(Lema 7.10, Nakagawa)} Si $\mathcal{B}$ es fuertemente cerrada en 
 $\mathcal{A}$ bajo igualadores, entonces $\mathcal{B}$ es cerrada en 
 $\mathcal{A}$ bajo intersecciones de monomorfismos regulares.
-\noindent
 
+\end{lema}
 \textbf{Demostración.}
 Sea $(h_{i}: Z \longrightarrow X)_{i \in I}$ una familia de monomorfismos
 regulares con $X \in Obj(\mathcal{B})$; queremos demostrar que su intersección
@@ -479,7 +609,8 @@ por unicidad concluimos que $\omega_{i}' = \omega_{i} \circ \phi$.
 \QEDB
 \vspace{0.2cm}
 
-Recordatorio de algunas definiciones: si $\mathcal{B}$ es una
+Recordemos estas definiciones;
+si $\mathcal{B}$ es una
 subcategoría de $\mathcal{A}$, entonces
 \begin{itemize}
 	\item $\mathcal{B}$ es \textbf{llena} (``full'') si, para cualesquiera
