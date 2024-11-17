@@ -21,7 +21,9 @@
 %\newcommand{\mathcolorbox}[2]{\colorbox{#1}{$\displaystyle #2$}}
 \usepackage{color, soul}
 \usepackage{hyperref}
-\newcommand{\hlgray}[1]{{\sethlcolor{lightgray}\hl{#1}}}
+
+\definecolor{Ivory2}{HTML}{eceee4}
+\newcommand{\hlgray}[1]{{\sethlcolor{Ivory2}\hl{#1}}}
 
 
 % ----------------------------------------------FIGURAS-----------
@@ -60,6 +62,7 @@
 \usepackage{thmbox}
 
 \newemptytheorem{ejemplo}{Ejemplo}
+\newemptytheorem{defi}{Definición}
 
 
 			\newtheorem[M]{teo}{Teorema}[section]
@@ -71,13 +74,16 @@
 			\newtheorem[M]{prop}[teo]{Proposición}
 			\newtheorem[M]{obs}[teo]{Observación}
 			\newtheorem[M]{cor}[teo]{Corolario}
-			\newtheorem[M]{defi}[teo]{Definición}
 			\newtheorem[M]{notacion}[teo]{Notación}
 			\newtheorem[M]{nota}[teo]{Nota}
 			\newtheorem{pregunta}{Pregunta}
 
 			
 
+% ---------------------------------------- ÍNDICE
+
+\usepackage{imakeidx}
+\makeindex
 
 \usepackage{subfiles} % Best loaded last in the preamble
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -87,9 +93,286 @@
 \begin{flushright}
 \textbf{Amélie Bernès}
 \end{flushright}
+\tableofcontents
+
+\section{Secciones y retracciones, monomorfismos y epimorfismos}
+
+Porque en teoría de conjuntos se usan indistíntamente los términos
+``monomorfismo'' e ``inyección'' junto con 
+``epimorfismo'' y ``suprayección'', pero en teoría de categorías
+no necesariamente coinciden.
+
+\subsection{Secciones y retracciones}
+\begin{defi}
+Un morfismo $f: A \longrightarrow B$ en una categoría 
+$\mathcal{C}$ es una 
+\hlgray{\textbf{sección en $\mathcal{C}$}} si existe
+otro morfismo $g: B \longrightarrow A$ tal que $g \circ f = 1_{A}$.
+\end{defi}
+\begin{center}
+\textbf{Secciones: morfismos con inverso izquierdo.}
+\end{center}
+\begin{prop}
+Las secciones en \textbf{Set} 
+con dominio $A \neq \emptyset$
+son exactamente las inyecciones
+$f: A \longrightarrow B$.
+\end{prop}
+\noindent
+\textbf{Demostración.}
+Claro que se pide $A \neq \emptyset$ pues, 
+si $f: \emptyset \longrightarrow B$ es sección, 
+entonces $B = \emptyset$, pues no existe una función de 
+$B \neq \emptyset$ al vacío.
+
+\begin{itemize}
+	\item[$\Rightarrow$]] Sea $f: A \longrightarrow B$ inyectiva, y escójase
+	un punto $x_{0} \in A$. Si $y \in f(A)$, el que $f$ sea inyectiva 
+	significa que su fibra bajo $f$ tiene un solo elemento;
+	$f^{-1}(\{ y \}) = \{ x \}$. Sea pues la función
+	$g: B \longrightarrow A$ definida como
+	
+	\begin{minipage}{0.5\textwidth}
+		
+		\begin{align*}
+	g(y) = \begin{cases}
+	f^{-1}(y) & \textit{ si } y \in f(A) \\
+	x_{0} & \textit{ si } y \not\in f(A).
+	\end{cases}
+	\end{align*}
+		
+		\end{minipage} \hfill
+		\begin{minipage}{0.45\textwidth}
+		\begin{figure}[H]
+	\centering
+		\includegraphics[scale=2.6]{cat1}
+	 \end{figure}
+		
+		\end{minipage}
+			
+			Claro que $g \circ f = 1_{A}$ pues, dado $x \in A$ 
+			cualquiera, como $f(x) \in f(A)$,
+			\[
+			(g \circ f)(x) = g (f(x)) = x.
+			\]
+	\item[$\Leftarrow$]] Si existe $g: B \longrightarrow A$ tal que 
+	$g \circ f = 1_{A}$, entonces, si $x_{1}, x_{2} \in A$
+	son tales que $f(x_{1}) = f(x_{2})$, los puntos son iguales pues
+	\[
+	x_{1} = 1_{A}(x_{1}) = (g \circ f)(x_{1})
+	g (f(x_{1})) = g (f(x_{2})) = (g \circ f)(x_{2}) = 1_{A}(x_{2}) = x_{2}.
+	\] 
+\end{itemize}
+\QEDB
+\vspace{0.2cm}
+
+El ejemplo canónico en \textbf{Set} de secciones (y las motivaciones
+del nombre ``sección'') es el de la gráfica de una función:
+si $X, Y$ son conjuntos y $a \in Y$ fijo,
+entonces $f: X \longrightarrow X \times Y$ definida como
+\[
+f(x) = (x, a)
+\]
+es una sección.
+En general, si $f: X \longrightarrow Y$ es función, 
+entonces $\hat{f}: X \longrightarrow X \times Y$
+definida como
+\[
+\hat{f}(x) = (x, f(x))
+\]
+es sección.
+
+\begin{figure}[H]
+\centering
+	\includegraphics[scale=2.5]{cat2} 
+ \end{figure}
+
+\begin{obs}
+Si $f, g$ son morfismos tales que $g \circ f$ es sección, entonces $f$ 
+es sección.
+\end{obs}
+Claro, pues
+\[
+1_{A} = h \circ (g \circ f) = (h \circ g) \circ f.
+\]
+
+\begin{defi}
+Un morfismo $f: A \longrightarrow B$ en una categoría 
+$\mathcal{C}$ es una \textbf{\hlgray{retracción en $\mathcal{C}$}}
+si existe $g: B \longrightarrow A$ tal que $f \circ g = 1_{B}$.
+\end{defi}
+
+\begin{center}
+\textbf{Retracciones: morfismos con inverso derecho.}
+\end{center}
+
+\begin{prop}
+Las retracciones en $Set$ son las funciones suprayectivas 
+$f: A \longrightarrow B$.
+\end{prop}
+\noindent
+\textbf{Demostración.}
+Esta demostración usa el axioma de elección (de hecho, el enunciado
+de la proposición es equivalente al axioma de elección).
+\hl{Terminar. Hugo Rincón p.103., Hernández p.57}
+\QEDB
+\vspace{0.2cm}
+
+
+\begin{defi}
+Un morfismo $f: A \longrightarrow B$ que sea tanto
+sección como retracción 
+(i.e. que tenga inversa izquierda y derecha)
+es llamado un \textbf{\hlgray{isomorfismo}}.
+\end{defi}
+\begin{minipage}{0.5\textwidth}
+Claro que si $f$ es un isomorfismo y si 
+$g, h: B \longrightarrow A$ son una inversa izquierda
+y derecha, o sea, si $g \circ f = 1_{A}$ y 
+$f \circ h = 1_{B}$, entonces $g$ y $h$ coinciden, pues
+\[
+g = g \circ 1_{B} = g \circ (f \circ h) = (g \circ f) \circ h
+= 1_{A} \circ h = h.
+\]
+\end{minipage} \hfill
+\begin{minipage}{0.45\textwidth}
+\begin{figure}[H]
+\centering
+	\includegraphics[scale=2.5]{cat3} 
+ \end{figure}
+\end{minipage}
+
+\subsection{Monomorfismos y epimorfismos}
+
+\begin{minipage}{0.5\textwidth}
+\begin{defi}
+Un morfismo $f: A \longrightarrow B$ en una categoría 
+$\mathcal{C}$ es un \textbf{\hlgray{monomorfismo}} si
+\[
+\forall h, k \in Mor(\mathcal{C}): \hspace{0.2cm}
+f \circ h = f \circ k \Rightarrow h = k.
+\]
+\end{defi}
+\end{minipage} \hfill
+\begin{minipage}{0.45\textwidth}
+
+\begin{figure}[H]
+\centering
+	\includegraphics[scale=2.5]{cat4} 
+ \end{figure}
+\end{minipage}
+
+\begin{center}
+\textbf{Monomorfismo: cancelable por la izquierda}
+\end{center}
+
+
+\begin{prop}
+	\label{prop: toda seccion es mono}
+Toda $\mathcal{C}-$sección es un monomorfismo.
+\end{prop}
+\noindent
+\textbf{Demostración.}
+En efecto, si $g$ es una inversa izquierda para
+la $\mathcal{C}-$sección $f$, i.e.
+$g \circ f = 1_{A}$,
+y 
+$h, k: C \longrightarrow A$ son morfismos 
+tales que $f \circ h = f \circ k$,
+entonces
+\[
+h = 1_{A} \circ h = (g \circ f) \circ h = g \circ ( f \circ h)
+= g \circ (f \circ k) = (g \circ f) \circ k = 1_{A} \circ k = k.  
+\]
+
+\begin{figure}[H]
+\centering
+	\includegraphics[scale=2.5]{cat5} 
+ \end{figure}
+\QEDB
+\vspace{0.2cm}
+
+\begin{prop}
+En cualquier categoría $\mathcal{C}$, son equivalentes:
+\begin{enumerate}
+	\item $f$ es un isomorfismo
+	\item $f$ es un monomorfismo y una retracción.
+\end{enumerate}
+\end{prop}
+\noindent
+\textbf{Demostración.}
+El que $1)$ implica $2)$ es claro por la Proposición 
+\ref{prop: toda seccion es mono}. 
+
+Como $f$ es retracción, existe $g: B \longrightarrow A$ tal que
+$f \circ g = 1_{B}$.Buscamos que también ocurra 
+$g \circ f = 1_{A}$. 
+\[
+f \circ (g \circ f) = (f \circ g ) \circ f = 
+1_{B} \circ f = f = f \circ 1_{A},
+\]
+luego, como $f$ es cancelable por la izquierda, 
+$g \circ f = 1_{A}$.
+
+\QEDB
+\vspace{0.2cm}
+
+\begin{minipage}{0.5\textwidth}
+\begin{defi}
+Un morfismo $f: A \longrightarrow B$ en una categoría 
+$\mathcal{C}$ es un \textbf{\hlgray{epimorfismo}} si
+\[
+\forall h, k \in Mor(\mathcal{C}): \hspace{0.2cm}
+h \circ f = k \circ f \Rightarrow h = k.
+\]
+\end{defi}
+\end{minipage} \hfill
+\begin{minipage}{0.45\textwidth}
+
+\begin{figure}[H]
+\centering
+	\includegraphics[scale=2.5]{cat6} 
+ \end{figure}
+\end{minipage}
+
+\begin{center}
+\textbf{Epimorfismo: cancelable por la derecha.}
+\end{center}
+
+\begin{minipage}{0.5\textwidth}
+\begin{prop}
+Toda $\mathcal{C}-$retracción es un epimorfismo.
+\end{prop}
+\end{minipage} \hfill
+\begin{minipage}{0.45\textwidth}
+\begin{figure}[H]
+\centering
+	\includegraphics[scale=2.5]{cat7} 
+ \end{figure}
+\end{minipage}
+
+\begin{defi}
+Un \textbf{\hlgray{bimorfismo}} es un morfismo que es epi y mono
+(i.e. es cancelable por ambos lados).
+\end{defi}
+
+
+
+
+\begin{figure}[H]
+\centering
+	\includegraphics[scale=2.5]{cat8} 
+ \end{figure}
+
+
+
+
+
+
+
 
 \section{Igualadores (Equalizers)}
-En una categoría $\mathcal{A}$, un \textbf{igualador}
+En una categoría $\mathcal{A}$, un \textbf{\hlgray{igualador}}
 $(Z, h: Z \longrightarrow X)$ para dos morfismos 
 $f, g : X \longrightarrow Y$ es una pareja tal que 
 
@@ -215,6 +498,15 @@ Tanto $\phi = p$ como $\phi = q$ funcionan, luego, $p = q$.
 
 \QEDB
 \vspace{0.2cm}
+
+\begin{defi}
+A todo monomorfismo que sea un igualador para dos morfismos
+(con el mismo dominio) en
+su categoría se le llama un \textbf{\hlgray{monomorfismo regular}}.
+\end{defi}
+
+
+\hl{monomorfismo extremal?}
 
 \section{Categorías reflexivas, Nakagawa (Categorical Topology)}
 

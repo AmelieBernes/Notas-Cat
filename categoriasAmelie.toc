@@ -1,0 +1,6 @@
+\babel@toc {nil}{}\relax 
+\contentsline {section}{\numberline {1}Secciones y retracciones, monomorfismos y epimorfismos}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Secciones y retracciones}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Monomorfismos y epimorfismos}{3}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Igualadores (Equalizers)}{4}{section.2}%
+\contentsline {section}{\numberline {3}Categorías reflexivas, Nakagawa (Categorical Topology)}{5}{section.3}%
